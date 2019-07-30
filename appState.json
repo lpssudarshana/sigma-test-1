@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sigma-test-1/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: { 'id': event.id, 'name': event.name, 'age': event.age }\n    }).promise()\n        .then((data) => {\n           callback(null, { \"data\": data });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n\n    \n\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: { 'id': event.id, 'name': event.name, 'age': event.age }\n    }).promise()\n        .then((data) => {\n           callback(null, { \"data\": data.$response.httpResponse.statusCode });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n\n    \n\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -41,7 +41,7 @@
             "id": "b196c982-fa9e-4823-8ee1-b04d4a8df08d",
             "name": "Unnamed event",
             "functionId": "83e58674-7d5a-406d-b8e1-e87c4f5e4799",
-            "event": "{ \"id\": 1, \"name\":\"sudarshana\", \"age\": 24 }"
+            "event": "{ \"id\": \"1\", \"name\":\"sudarshana\", \"age\": 24 }"
           }
         }
       }
@@ -195,7 +195,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1564463603992
+    "lastSave": 1564464838206
   },
   "VCS_STATE": {
     "provider": "GitHub",
