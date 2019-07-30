@@ -8,12 +8,12 @@ exports.handler = function (event, context, callback) {
         Item: {  'name': event.name, 'age': event.age }
     }).promise()
         .then((data) => {
-            //your logic goes here
+           callback(null, { "data": data });
         })
         .catch((err) => {
-            //handle error
+            callback(null, { "error": err });
         });
 
-    callback(null, { "message": "Successfully executed" });
+    
 
 }

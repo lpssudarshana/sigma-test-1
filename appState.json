@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sigma-test-1/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: {  'name': event.name, 'age': event.age }\n    }).promise()\n        .then((data) => {\n            //your logic goes here\n        })\n        .catch((err) => {\n            //handle error\n        });\n\n    callback(null, { \"message\": \"Successfully executed\" });\n\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: {  'name': event.name, 'age': event.age }\n    }).promise()\n        .then((data) => {\n           callback(null, { \"data\": data });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n\n    \n\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -195,7 +195,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1564462926459
+    "lastSave": 1564463416855
   },
   "VCS_STATE": {
     "provider": "GitHub",
