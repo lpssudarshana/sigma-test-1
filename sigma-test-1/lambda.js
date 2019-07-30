@@ -5,7 +5,7 @@ exports.handler = function (event, context, callback) {
     debugger;
     ddb.put({
         TableName: 'sudarshana-test-table',
-        Item: {  'name': event.name, 'age': event.age }
+        Item: { 'id': event.id, 'name': event.name, 'age': event.age }
     }).promise()
         .then((data) => {
            callback(null, { "data": data });
