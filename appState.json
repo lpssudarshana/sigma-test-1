@@ -55,7 +55,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sigma-test-1/list.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    ddb.scan({\n        TableName: 'sudarshana-test-table'\n    }).promise()\n        .then((data) => {\n            callback(null, { \"data\": data });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.scan({\n        TableName: 'sudarshana-test-table'\n    }).promise()\n        .then((data) => {\n            callback(null, { \"data\": data.Items });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -68,7 +68,15 @@
             "resourceName": "apigusEast1getUsersuserlistget",
             "config": {}
           }
-        ]
+        ],
+        "testCases": {
+          "74c7a577-dbbc-4bbb-a215-bdc920466de6": {
+            "id": "74c7a577-dbbc-4bbb-a215-bdc920466de6",
+            "name": "test",
+            "functionId": "fa634171-8138-472f-bdf1-cf412a4fe2f4",
+            "event": "{\n    \n}"
+          }
+        }
       }
     },
     "deletedFiles": [],
@@ -236,7 +244,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1564466665075
+    "lastSave": 1564469591088
   },
   "VCS_STATE": {
     "provider": "GitHub",
