@@ -8,7 +8,8 @@
         "type": "DIRECTORY",
         "isDirectory": true,
         "children": [
-          "83e58674-7d5a-406d-b8e1-e87c4f5e4799"
+          "83e58674-7d5a-406d-b8e1-e87c4f5e4799",
+          "fa634171-8138-472f-bdf1-cf412a4fe2f4"
         ],
         "isRemovable": false,
         "filePath": "sigma-test-1"
@@ -22,7 +23,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sigma-test-1/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: { 'id': event.id, 'name': event.name, 'age': event.age }\n    }).promise()\n        .then((data) => {\n           callback(null, { \"data\": data.$response.httpResponse.statusCode });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n\n    \n\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: { 'id': event.id, 'name': event.name, 'age': event.age }\n    }).promise()\n        .then((data) => {\n           callback(null, { \"statusCode\": data.$response.httpResponse.statusCode });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n}\n\n\n\n\n\n",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -44,14 +45,39 @@
             "event": "{ \"id\": \"1\", \"name\":\"sudarshana\", \"age\": 24 }"
           }
         }
+      },
+      "fa634171-8138-472f-bdf1-cf412a4fe2f4": {
+        "id": "fa634171-8138-472f-bdf1-cf412a4fe2f4",
+        "parent": "666dba61-c5db-47b8-9af0-94b9147a5028",
+        "name": "list.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "sigma-test-1/list.js",
+        "code": "exports.handler = function(event, context, callback) {\n    \n    callback(null, {\"message\": \"Successfully executed\"});\n}",
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [
+          {
+            "resourceName": "apigusEast1getUsersuserlistget",
+            "config": {}
+          }
+        ]
       }
     },
     "deletedFiles": [],
     "rootNode": "666dba61-c5db-47b8-9af0-94b9147a5028",
     "openFiles": [
-      "83e58674-7d5a-406d-b8e1-e87c4f5e4799"
+      "83e58674-7d5a-406d-b8e1-e87c4f5e4799",
+      "fa634171-8138-472f-bdf1-cf412a4fe2f4"
     ],
-    "currentFileId": "83e58674-7d5a-406d-b8e1-e87c4f5e4799",
+    "currentFileId": "fa634171-8138-472f-bdf1-cf412a4fe2f4",
     "resources": {
       "ddbsudarshanaTest": {
         "name": "ddbsudarshanaTest",
@@ -160,6 +186,25 @@
           "stageName": "dev",
           "mode": 0
         }
+      },
+      "apigusEast1getUsersuserlistget": {
+        "name": "apigusEast1getUsersuserlistget",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 0,
+          "apiName": "getUsers",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "user/list",
+          "resourcePath": "/user/list",
+          "restMethod": "GET",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 0,
+          "stageName": "dev",
+          "mode": 0
+        }
       }
     },
     "customTemplate": {
@@ -195,7 +240,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1564464838206
+    "lastSave": 1564465997368
   },
   "VCS_STATE": {
     "provider": "GitHub",
