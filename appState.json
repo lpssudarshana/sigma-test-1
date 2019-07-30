@@ -23,7 +23,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sigma-test-1/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: { 'id': event.id, 'name': event.name, 'age': event.age }\n    }).promise()\n        .then((data) => {\n           callback(null, { \"statusCode\": data.$response.httpResponse.statusCode });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n}\n\n\n\n\n\n",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: { 'id': event.id, 'name': event.name, 'age': event.age }\n    }).promise()\n        .then((data) => {\n           callback(null, { \"statusCodesd\": data.$response.httpResponse.statusCode });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n}\n\n\n\n\n\n",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -55,7 +55,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sigma-test-1/list.js",
-        "code": "exports.handler = function(event, context, callback) {\n    \n    callback(null, {\"message\": \"Successfully executed\"});\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    ddb.scan({\n        TableName: 'sudarshana-test-table'\n    }).promise()\n        .then((data) => {\n            callback(null, { \"data\": data });\n        })\n        .catch((err) => {\n            callback(null, { \"error\": err });\n        });\n\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -119,7 +119,7 @@
         "type": "DynamoDB",
         "config": {
           "mode": 0,
-          "operation": "put",
+          "operation": "scan",
           "table": {
             "arn": "",
             "name": "sudarshana-test-table",
@@ -134,11 +134,7 @@
           "isGlobalEditMode": false,
           "parameters": {
             "Key": {},
-            "Item": {
-              "id": "0",
-              "name": "sudarshana",
-              "age": 0
-            },
+            "Item": {},
             "ExpressionAttributeValues": {}
           },
           "triggerParams": {},
@@ -240,7 +236,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1564465997368
+    "lastSave": 1564466665075
   },
   "VCS_STATE": {
     "provider": "GitHub",
