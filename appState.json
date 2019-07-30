@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sigma-test-1/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: { 'id': '0', 'name': 'sudarshana', 'age': 0 }\n    }).promise()\n        .then((data) => {\n            //your logic goes here\n        })\n        .catch((err) => {\n            //handle error\n        });\n\ncallback(null, { \"message\": \"Successfully executed\" });\n\n}",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    debugger;\n    ddb.put({\n        TableName: 'sudarshana-test-table',\n        Item: {  'name': event.name, 'age': event.age }\n    }).promise()\n        .then((data) => {\n            //your logic goes here\n        })\n        .catch((err) => {\n            //handle error\n        });\n\n    callback(null, { \"message\": \"Successfully executed\" });\n\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -32,10 +32,18 @@
         },
         "triggers": [
           {
-            "resourceName": "apigusEast1getUsersusercreatepost",
+            "resourceName": "apigusEast1saveUsersusercreatepost",
             "config": {}
           }
-        ]
+        ],
+        "testCases": {
+          "b196c982-fa9e-4823-8ee1-b04d4a8df08d": {
+            "id": "b196c982-fa9e-4823-8ee1-b04d4a8df08d",
+            "name": "Unnamed event",
+            "functionId": "83e58674-7d5a-406d-b8e1-e87c4f5e4799",
+            "event": "{ \"name\":\"sudarshana\", \"age\": 24 }"
+          }
+        }
       }
     },
     "deletedFiles": [],
@@ -133,6 +141,25 @@
           "stageName": "dev",
           "mode": 0
         }
+      },
+      "apigusEast1saveUsersusercreatepost": {
+        "name": "apigusEast1saveUsersusercreatepost",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 0,
+          "apiName": "saveUsers",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "user/create",
+          "resourcePath": "/user/create",
+          "restMethod": "POST",
+          "proxyIntegration": false,
+          "enableCORS": true,
+          "stageMode": 0,
+          "stageName": "dev",
+          "mode": 0
+        }
       }
     },
     "customTemplate": {
@@ -168,7 +195,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1564401435548
+    "lastSave": 1564462926459
   },
   "VCS_STATE": {
     "provider": "GitHub",
